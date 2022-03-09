@@ -50,7 +50,7 @@ for epoch in range(1, 101):
         acc_batch = (output.argmax(dim=1) == y.to(device)).float().mean().item()
         tr_acc.append(acc_batch)
         pos_reg = utils.pos_regularization(model)
-        loss = criterion(output, y) + 0.5 * pos_reg
+        loss = criterion(output, y) + reg_factor * pos_reg
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
